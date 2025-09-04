@@ -1,5 +1,3 @@
-use std::{os::linux::raw::stat, thread::panicking};
-
 struct Ticket {
     title: String,
     description: String,
