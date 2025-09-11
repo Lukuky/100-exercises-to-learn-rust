@@ -13,6 +13,50 @@
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
 
+use std::process::Output;
+
+trait Power<EXP = Self> {
+    type Output;
+
+    fn power(self, exp: EXP) -> Self::Output;
+}
+
+impl Power<u16> for u32 {
+    type Output = u32;
+
+    fn power(self, exp: u16) -> u32 {
+        let mut result: Self::Output = 1;
+        for _i in 1..=exp {
+            result *= self;
+        }
+        return result;
+    }
+}
+
+impl Power<u32> for u32 {
+    type Output = u32;
+
+    fn power(self, exp: u32) -> u32 {
+        let mut result: Self::Output = 1;
+        for _i in 1..=exp {
+            result *= self;
+        }
+        return result;
+    }
+}
+
+impl Power<&u32> for u32 {
+    type Output = u32;
+
+    fn power(self, exp: &u32) -> u32 {
+        let mut result: Self::Output = 1;
+        for _i in 1..=*exp {
+            result *= self;
+        }
+        return result;
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Power;
